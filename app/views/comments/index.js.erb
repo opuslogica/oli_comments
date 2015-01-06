@@ -1,0 +1,3 @@
+$("#comments").append('<div class="page"><%= j render @comments %></div>');
+$('#comments_pagination .pagination').replaceWith("<%= j paginate @comments, :params => {:controller => 'comments', :action => 'index', :commentable_id => @commentable.id, :commentable_type => @commentable.class.name}, :remote => true %>");
+$('#loading-msg').text("");

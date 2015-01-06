@@ -1,0 +1,38 @@
+# Oli Comments
+
+Oli Comments provides an easy-to-configure commenting system.
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'oli_comments'
+
+And then execute:
+
+    $ bundle install
+
+Once you have bundled it, you should run the installation generator:
+
+    $ rails g oli_comments:install
+    
+Migrate
+    
+    $ rake db:migrate
+
+## Usage
+
+Once installed, configure important stuff in 
+`config/initializers/oli_comments.rb`
+
+## Todo:
+
+1. Add config for member image method
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request

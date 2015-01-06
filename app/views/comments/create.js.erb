@@ -1,0 +1,16 @@
+<% if @success %>
+  <% if @parent %>
+    $("#comment_<%=@saved_comment.parent.id%> #reply_form").html('<%= escape_javascript(render partial: "comments/form") %>');
+    $('#comment_<%=@saved_comment.parent.id%> #replies').append('<%= escape_javascript(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
+  <% else%>
+    $("#comment_form").html('<%= escape_javascript(render partial: "comments/form") %>');
+    $("#comments").prepend('<%= escape_javascript(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
+	$('.hide-me-on-comment').hide();
+  <%end%>
+<%else %>
+  <% if @parent %>
+    //$("#comment_<%=@saved_comment.parent.id%> #reply_form #js_errors").html('<%= escape_javascript(render partial: "comments/errors",  :locals => {:obj => @saved_comment}) %>');
+  <% else%>
+    //$("#comment_form #js_errors").html('<%= escape_javascript(render partial: "comments/errors",  :locals => {:obj => @saved_comment}) %>');
+  <%end%>
+<%end%>
