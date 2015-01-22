@@ -14,7 +14,7 @@
           = time_ago(comment.created_at) 
           - if can? :destroy, comment
             = link_to comment, :class => "btn btn-danger", data: {confirm: "Are you sure you want to delete this comment?"}, :method => :delete, :remote => true, :class => "comment_delete" do
-              = image_tag("icons/orange-x.png")
+              = image_tag("orange-x.png")
 
     .row
       .col-xs-12
