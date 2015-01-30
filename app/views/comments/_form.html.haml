@@ -1,19 +1,20 @@
 - if can? :create, Comment
-  - form_name = (@parent) ? "comment_form_#{@parent.id}" : "comment_form_new"
-  = form_for @comment, html: {:remote => true, :name => form_name, :class => ""} do |f|
+  - parent ||= nil
+  - form_name = (parent) ? "comment_form_#{parent.id}" : "comment_form_new"
+  = form_for comment, html: {:remote => true, :name => form_name, :class => ""} do |f|
     #js_errors
-      = render 'comments/errors', obj: @comment
+      = render 'comments/errors', obj: comment
               
     = f.hidden_field :commentable_id
     = f.hidden_field :commentable_type
     = f.hidden_field :member_id
     
-    - if @parent
-      = hidden_field_tag :parent_comment_id, @parent.id
+    - if parent
+      = hidden_field_tag :parent_comment_id, parent.id
     .reply-form-columns
       .comment-left-column
         .comment-thumb
-          = member_thumb(@comment.member)
+          = member_thumb(comment.member)
       .comment-right-column
         = f.text_area :body, {:class => 'form-control reply-input expanding', :placeholder=>'Thoughts?'}
 
@@ -21,10 +22,10 @@
     -#  = f.submit "Comment", {class: "btn btn-blue pull-right"}
     
   :javascript
-    $("form[name='#{form_name}'] #comment_body").keypress(function(event) {
+    $("#comments_for_#{comment.commentable.class.name.downcase}_#{comment.commentable.id} form[name='#{form_name}'] #comment_body").keypress(function(event) {
         if (event.which == 13) {
             event.preventDefault();
-            $("form[name='#{form_name}']").submit();
+            $("#comments_for_#{comment.commentable.class.name.downcase}_#{comment.commentable.id} form[name='#{form_name}']").submit();
         }
     });
 

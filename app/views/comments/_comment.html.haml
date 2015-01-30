@@ -5,9 +5,8 @@
   .comment-right-column
     .comment-top-line.clearfix
       .comment-username
-        -# link_td = (comment.member.has_company?) ? company_path(comment.member.company) : member_path(comment.member)
         %strong= comment.member.name
-        =# link_to comment.member.fname, link_td
+        = link_to comment.member.name, comment.member
       
       .comment-date-and-delete
         .datetime
@@ -28,7 +27,6 @@
             %span.comment-img
               = reply_link(comment)
           = link_to "#{comment.children.size} Replies", comment, remote: true
-
 
   - if comment.parent.nil?
     #replies.clearfix.replies

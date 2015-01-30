@@ -187,5 +187,14 @@ $input-border-radius: 7px;
   border: 2px solid $light-grey-border;
 }
 
+#comments_pagination {
+  .pager{
+    text-align:center;
+    padding:5px;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+}
 
 

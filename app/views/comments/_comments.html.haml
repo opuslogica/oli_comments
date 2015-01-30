@@ -1,42 +1,24 @@
 -# set initial comments list
 - comments = commentable.root_comments.page(1)
-- @comment = Comment.new(commentable: commentable) if @comment.nil?
+- comment = Comment.new(commentable: commentable) if comment.nil?
 .comments-count
   - if comments.empty?
     %strong Comments
   - else
     %strong= "#{comments.count} Comments"
 
-#comments_wrapper
-  #comment_form
-    = render 'comments/form'
+%div{id: "comments_for_#{commentable.class.name.downcase}_#{commentable.id}"}
+  #comments_wrapper
+    #comment_form
+      = render 'comments/form', comment: comment
 
-  #comments
-    - if comments.empty?
-      %i.hide-me-on-comment Be the first to comment.
-    - else
-      .page
-        = render comments
-
-  #comments_pagination{style: "display:none;"}
-    = paginate comments, :params => {:controller => 'comments', :action => 'index', :commentable_id => commentable.id, :commentable_type => commentable.class.name}, :remote => true
-  #loading-msg
-
-:javascript
-  var $comments = $('#comments');
-  var c_height = $('#comments').height();
-  $comments.scrollTop(-20);
-
-  if ($('#comments_pagination .pagination').length) {
-    $comments.scroll(function() {
-      var url;
-      url = $('#comments_pagination .pagination a[rel=next]').attr('href');
-      if (url && $comments.scrollTop() <= 0) {
-        $('#loading-msg').text("Loading more comments...");
-        return $.getScript(url);
-      }else{
+    #comments_pagination
+      = render 'comments/pager', commentable: commentable, comments: comments
         
-      }
-    });
-    $('#comments').scroll();
-  }
+    #comments
+      - if comments.empty?
+        %i.hide-me-on-comment Be the first to comment.
+      - else
+        .page
+          = render comments.reverse
+

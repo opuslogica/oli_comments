@@ -1,3 +1,3 @@
-$("#comments").append('<div class="page"><%= j render @comments %></div>');
-$('#comments_pagination .pagination').replaceWith("<%= j paginate @comments, :params => {:controller => 'comments', :action => 'index', :commentable_id => @commentable.id, :commentable_type => @commentable.class.name}, :remote => true %>");
-$('#loading-msg').text("");
+$("#comments_for_<%=@commentable.class.name.downcase%>_<%=@commentable.id%> #comments").prepend('<div class="page"><%= j render @comments.reverse %></div>');
+$('#comments_for_<%=@commentable.class.name.downcase%>_<%=@commentable.id%> #comments_pagination').html("<%= j render partial: 'comments/pager', locals: {commentable: @commentable, comments: @comments} %>");
+$('#comments_for_<%=@commentable.class.name.downcase%>_<%=@commentable.id%> #loading-msg').text("");

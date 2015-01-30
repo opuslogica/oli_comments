@@ -1,0 +1,4 @@
+- if comments
+  - if !comments.next_page.nil?   
+    .pager
+      = link_to "Load Older Messages", comments_url(:commentable_id => commentable.id, :commentable_type => commentable.class.name, page: comments.next_page), :remote => true

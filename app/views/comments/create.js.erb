@@ -1,11 +1,11 @@
 <% if @success %>
   <% if @parent %>
-    $("#comment_<%=@saved_comment.parent.id%> #reply_form").html('<%= escape_javascript(render partial: "comments/form") %>');
+    $("#comment_<%=@saved_comment.parent.id%> #reply_form").html('<%= escape_javascript(render partial: "comments/form", locals: {comment: @comment, parent: @parent}) %>');
     $('#comment_<%=@saved_comment.parent.id%> #replies').append('<%= escape_javascript(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
   <% else%>
-    $("#comment_form").html('<%= escape_javascript(render partial: "comments/form") %>');
-    $("#comments").prepend('<%= escape_javascript(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
-	$('.hide-me-on-comment').hide();
+    $("#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@saved_comment.commentable.id%> #comment_form").html('<%= escape_javascript(render partial: "comments/form", locals: {comment: @comment}) %>');
+    $("#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@saved_comment.commentable.id%> #comments").prepend('<%= escape_javascript(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
+	$('#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@commentable.id%> .hide-me-on-comment').hide();
   <%end%>
 <%else %>
   <% if @parent %>

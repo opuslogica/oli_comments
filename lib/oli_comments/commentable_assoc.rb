@@ -7,7 +7,7 @@ module OliComments
 
     module ClassMethods
       def commentable
-        has_many :comments, :as => :commentable, :dependent => :destroy, :class_name => 'Comment'
+        has_many :comments, -> {order 'created_at desc'}, :as => :commentable, :dependent => :destroy, :class_name => 'Comment'
         
         class_eval do
           include InstanceMethods

@@ -1,4 +1,4 @@
 <% if @parent %>
-  $("#comment_<%=@parent.id%> #reply_form").html('<%= escape_javascript(render partial: "comments/form") %>');
+  $("#comment_<%=@parent.id%> #reply_form").html('<%= escape_javascript(render partial: "comments/form", locals: {comment: @comment, parent: @parent}) %>');
   $("#comment_<%=@parent.id%> #replies").html('<%= escape_javascript(render partial: "comments/replies", :locals => {:comment => @parent}) %>');
 <% end %>
