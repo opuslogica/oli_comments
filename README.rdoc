@@ -23,8 +23,33 @@ Migrate
 ## Usage
 
 Once installed, configure important stuff in 
-`config/initializers/oli_comments.rb`
+`config/initializers/oli_comments.rb`  #not implemented yet
 
+This gem uses cancan for permissions on who can comment/reply. Define permissions in your own ability model.
+This gem also requires a @current_member object when someone is logged in.
+
+1. Add 'commentable' to any model to which you would like to add comments.
+
+  class Recipe < ActiveRecord::Base
+      commentable
+      ...
+      ...
+  end
+  
+2. Implement 'commenters' on that model to return an array of members who should be notified in case someone posts a comment.
+  class Recipe
+    commentable
+    ...
+    def commenters
+      [self.member]
+    end
+    ...
+  end
+  
+3. Add the comments to the view of the commentable object:
+  = render 'comments/comments', commentable: @myobj 
+
+  
 ## Todo:
 
 1. Add config for member image method

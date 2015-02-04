@@ -1,6 +1,5 @@
 -# set initial comments list
 - comments = commentable.root_comments.page(1)
-- comment = Comment.new(commentable: commentable) if comment.nil?
 .comments-count
   - if comments.empty?
     %strong Comments
@@ -10,7 +9,7 @@
 %div{id: "comments_for_#{commentable.class.name.downcase}_#{commentable.id}"}
   #comments_wrapper
     #comment_form
-      = render 'comments/form', comment: comment
+      = render 'comments/form', commentable: commentable #, comment: comment
 
     #comments_pagination
       = render 'comments/pager', commentable: commentable, comments: comments

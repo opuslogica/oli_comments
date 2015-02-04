@@ -7,7 +7,13 @@ class CommentsController < ApplicationController
   
   def index
     @commentable = params[:commentable_type].constantize.find(params[:commentable_id])
-    @comments  = @commentable.root_comments.page params[:page]
+    @comments = @commentable.root_comments.page params[:page]
+    
+    #update markers if user logged in
+    if @current_member
+      CommentMarker.joins(:comment).where(:is_read => false, :member_id => @current_member.id, "comments.commentable_id" => @commentable.id, "comments.commentable_type" => @commentable.class.name).update_all(is_read: true)
+    end
+
     @comment = Comment.build_from(@commentable, @current_member.id, "") if logged_in?
   end
 
