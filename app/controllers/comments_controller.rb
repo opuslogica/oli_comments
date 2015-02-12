@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
     @comments = @commentable.root_comments.page params[:page]
     
     #update markers if user logged in
+    # need to expand this
     if @current_member
       CommentMarker.joins(:comment).where(:is_read => false, :member_id => @current_member.id, "comments.commentable_id" => @commentable.id, "comments.commentable_type" => @commentable.class.name).update_all(is_read: true)
     end

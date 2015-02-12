@@ -26,7 +26,8 @@
           - if can? :create, Comment
             %span.comment-img
               = reply_link(comment)
-          = link_to "#{comment.children.size} Replies", comment, remote: true
+          .num_replies
+            = link_to "#{comment.children.size} Replies", comment, remote: true
 
   - if comment.parent.nil?
     #replies.clearfix.replies

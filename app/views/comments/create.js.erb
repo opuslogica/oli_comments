@@ -1,11 +1,13 @@
 <% if @success %>
   <% if @parent %>
-    $("#comment_<%=@saved_comment.parent.id%> #reply_form").html('<%= escape_javascript(render partial: "comments/form", locals: {comment: @comment, parent: @parent}) %>');
-    $('#comment_<%=@saved_comment.parent.id%> #replies').append('<%= escape_javascript(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
+    $("#comment_<%=@saved_comment.parent.id%> #reply_form").html('<%= j(render partial: "comments/form", locals: {comment: @comment, parent: @parent}) %>');
+    $('#comment_<%=@saved_comment.parent.id%> #replies').append('<%= j(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
+		$('#comment_<%=@saved_comment.parent.id%> .num_replies').html("<%=j link_to @parent.children.size.to_s+' Replies', @parent, remote: true %>");
   <% else%>
-    $("#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@saved_comment.commentable.id%> #comment_form").html('<%= escape_javascript(render partial: "comments/form", locals: {comment: @comment}) %>');
-    $("#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@saved_comment.commentable.id%> #comments").prepend('<%= escape_javascript(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
-	$('#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@commentable.id%> .hide-me-on-comment').hide();
+    $("#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@saved_comment.commentable.id%> #comment_form").html('<%= j(render partial: "comments/form", locals: {comment: @comment}) %>');
+    $("#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@saved_comment.commentable.id%> #comments").prepend('<%= j(render partial: "comments/comment", :locals => {:comment => @saved_comment}) %>');
+  	$('#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@commentable.id%> .hide-me-on-comment').hide();		
+		$('#comments_for_<%=@saved_comment.commentable.class.name.downcase%>_<%=@commentable.id%> .comments-count').html("<%= @commentable.root_comments.count %> Comments");
   <%end%>
 <%else %>
   <% if @parent %>

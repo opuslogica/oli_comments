@@ -1,12 +1,12 @@
 -# set initial comments list
 - comments = commentable.root_comments.page(1)
-.comments-count
-  - if comments.empty?
-    %strong Comments
-  - else
-    %strong= "#{comments.count} Comments"
 
 %div{id: "comments_for_#{commentable.class.name.downcase}_#{commentable.id}"}
+  .comments-count
+    - if comments.empty?
+      Comments
+    - else
+      = "#{comments.count} Comments"
   #comments_wrapper
     #comment_form
       = render 'comments/form', commentable: commentable #, comment: comment
