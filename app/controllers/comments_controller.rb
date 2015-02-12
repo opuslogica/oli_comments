@@ -62,9 +62,6 @@ class CommentsController < ApplicationController
 
   def build_new
     @commentable = @comment.commentable
-    
-    Rails.logger.debug "BUILDING A NEW COMMENT"
-    
     @comment = Comment.build_from(@commentable, @current_member.id, "")
   end
 
