@@ -24,13 +24,6 @@
     -#  = f.submit "Comment", {class: "btn btn-blue pull-right"}
     
   :javascript
-    $("#comments_for_#{comment.commentable.class.name.downcase}_#{comment.commentable.id} form[name='#{form_name}'] #comment_body").keypress(function(event) {
-        if (event.which == 13) {
-            event.preventDefault();
-            $("#comments_for_#{comment.commentable.class.name.downcase}_#{comment.commentable.id} form[name='#{form_name}']").submit();
-        }
-    });
-
     $(document).on("shown.bs.modal", function(){
       $("textarea").expanding();
     });

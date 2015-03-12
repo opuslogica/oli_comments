@@ -1,7 +1,7 @@
 -# set initial comments list
 - comments = commentable.root_comments.page(1)
 
-%div{id: "comments_for_#{commentable.class.name.downcase}_#{commentable.id}"}
+%div{id: "comments_for_#{commentable.class.name.downcase}_#{commentable.id}", class: 'comments'}
   .comments-count
     - if comments.empty?
       Comments

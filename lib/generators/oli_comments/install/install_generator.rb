@@ -24,6 +24,12 @@ module OliComments
           "\n *= require 'oli_comments'\n\n"
         end
       end 
+      
+      def add_js
+        insert_into_file "app/assets/javascripts/application.js", :before => "//= require_tree ." do
+          "\n//= require oli_comments\n"
+        end
+      end
 
     end
   end
