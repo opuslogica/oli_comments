@@ -14,6 +14,7 @@ module CommentsHelper
     if comment.parent.nil?
       link_to new_comment_path(parent_comment_id: comment.id), remote: true do
         concat(image_tag "orange-speech-bubble.png")
+        concat("Reply")
       end
     else
       ""

@@ -27,7 +27,8 @@
             %span.comment-img
               = reply_link(comment)
           .num_replies
-            = link_to "#{comment.children.size} Replies", comment, remote: true
+            - if comment.children.size > 0  
+              = link_to "#{comment.children.size} Replies", comment, remote: true
 
   - if comment.parent.nil?
     #replies.clearfix.replies
