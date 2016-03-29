@@ -16,7 +16,11 @@
         
     #comments
       - if comments.empty?
-        %i.hide-me-on-comment Be the first to comment.
+        %i.hide-me-on-comment 
+          - if can?(:create, Comment.new(commentable: commentable))
+            Be the first to comment.
+          - else
+            No comments yet.
       - else
         .page
           = render comments.reverse
