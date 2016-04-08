@@ -17,7 +17,7 @@
     #comments
       - if comments.empty?
         %i.hide-me-on-comment 
-          - if can?(:create, Comment.new(commentable: commentable))
+          - if logged_in? && can?(:create, Comment.new(commentable: commentable))
             Be the first to comment.
           - else
             No comments yet.

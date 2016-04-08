@@ -1,6 +1,6 @@
 - commentable ||= nil
 - comment ||= Comment.new(commentable: commentable, member: @current_member)
-- if can? :create, comment  
+- if logged_in? && (can? :create, comment) 
   - parent ||= nil
   - form_name = (parent) ? "comment_form_#{parent.id}" : "comment_form_new"
   = form_for comment, html: {:remote => true, :name => form_name, :class => ""} do |f|
