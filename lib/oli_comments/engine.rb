@@ -12,7 +12,7 @@ module OliComments
     
     initializer 'oli_comments.action_controller' do |app|
       ActiveSupport.on_load :action_controller do
-        helper OliComments::CommentsHelper
+        helper CommentsHelper
       end
     end
     
